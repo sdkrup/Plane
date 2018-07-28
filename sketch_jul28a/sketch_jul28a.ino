@@ -8,17 +8,17 @@ int y1 = 0;
 int x2 = 0;
 int y2 = 0;
 
-float x1Mid = 5;
-float y1Mid = 5;
-float x1Max = 10;
-float y1Max = 10;
+float x1Mid = 511;
+float y1Mid = 516;
+float x1Max = 1023;
+float y1Max = 1023;
 float x1Min = 0;
 float y1Min = 0;
 
-float x2Mid = 5;
-float y2Mid = 5;
-float x2Max = 10;
-float y2Max = 10;
+float x2Mid = 511;
+float y2Mid = 516;
+float x2Max = 1023;
+float y2Max = 1023;
 float x2Min = 0;
 float y2Min = 0;
 
