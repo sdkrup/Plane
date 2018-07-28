@@ -1,71 +1,116 @@
-const int xPin = 0;
-const int yPin = 1;
-const int swPin = 2;
-float x = 0;
-float y = 0;
-boolean sw = false;
+const int x1Pin = 0;
+const int y1Pin = 1;
+const int x2Pin = 2;
+const int y2Pin = 3;
 
-float xMid = 5;
-float yMid = 5;
-float xMax = 10;
-float yMax = 10;
-float xMin = 0;
-float yMin = 0;
+int x1 = 0;
+int y1 = 0;
+int x2 = 0;
+int y2 = 0;
+
+float x1Mid = 5;
+float y1Mid = 5;
+float x1Max = 10;
+float y1Max = 10;
+float x1Min = 0;
+float y1Min = 0;
+
+float x2Mid = 5;
+float y2Mid = 5;
+float x2Max = 10;
+float y2Max = 10;
+float x2Min = 0;
+float y2Min = 0;
 
 void setup() {
 
   Serial.begin(9600);
   
-  xMid = analogRead(xPin);
-  yMid = analogRead(yPin);
+  x1Mid = analogRead(x1Pin);
+  y1Mid = analogRead(y1Pin);
+
+  x2Mid = analogRead(x2Pin);
+  y2Mid = analogRead(y2Pin);
 
   while (millis() < 5000) {
-    x = analogRead(xPin);
-    y = analogRead(yPin);
+    x1 = analogRead(x1Pin);
+    y1 = analogRead(y1Pin);
+    x2 = analogRead(x2Pin);
+    y2 = analogRead(y2Pin);
 
-    xMax = (x > xMax) ? x : xMax;
-    xMin = (x < xMin) ? x : xMin;        
-    yMax = (y > yMax) ? y : yMax;
-    yMin = (y < yMin) ? y : yMin;
+    x1Max = (x1 > x1Max) ? x1 : x1Max;
+    x1Min = (x1 < x1Min) ? x1 : x1Min;        
+    y1Max = (y1 > y1Max) ? y1 : y1Max;
+    y1Min = (y1 < y1Min) ? y1 : y1Min;
+
+    x2Max = (x2 > x2Max) ? x2 : x2Max;
+    x2Min = (x2 < x2Min) ? x2 : x2Min;        
+    y2Max = (y2 > y2Max) ? y2 : y2Max;
+    y2Min = (y2 < y2Min) ? y2 : y2Min;
   }
 }
 
 void loop() {
-  x = toPercent(analogRead(xPin),xMax);
-  y = toPercent(analogRead(yPin),yMax);
-  sw = analogRead(swPin);
+  x1 = toPercent(analogRead(x1Pin),x1Max);
+  y1 = toPercent(analogRead(y1Pin),y1Max);
+  x2 = toPercent(analogRead(x2Pin),x2Max);
+  y2 = toPercent(analogRead(y2Pin),y2Max);
+  
+  //log();
 
-  log();
+  Serial.write(255);
+  Serial.write(x1);
+  Serial.write(y1);
+  Serial.write(x2);
+  Serial.write(y2);
 }
 
-float toPercent(float var, float mmax) {
+int toPercent(float var, float mmax) {
   
   return (var /mmax ) * 100;
   
 }
 
 void log() {
-  Serial.print (" xMax: ");
-  Serial.print(xMax);
-  Serial.print(" yMax: " );
-  Serial.print( yMax) ;
-  Serial.print (" xMin: ");
-  Serial.print(xMin);
-  Serial.print(" yMin: " );
-  Serial.print( yMin) ;
-  Serial.print (" xMid: ");
-  Serial.print(xMid);
-  Serial.print(" yMid: " );
-  Serial.print( yMid) ;
+  
+  Serial.print (" x1Max: ");
+  Serial.print(x1Max);
+  Serial.print(" y1Max: " );
+  Serial.print( y1Max) ;
+  Serial.print (" x1Min: ");
+  Serial.print(x1Min);
+  Serial.print(" y1Min: " );
+  Serial.print( y1Min) ;
+  Serial.print (" x1Mid: ");
+  Serial.print(x1Mid);
+  Serial.print(" y1Mid: " );
+  Serial.print( y1Mid) ;
+
+  Serial.print (" x1: ");
+  Serial.print(x1);
+  Serial.print(" y1: " );
+  Serial.print( y1) ;
+    
+  Serial.print (" x2Max: ");
+  Serial.print(x2Max);
+  Serial.print(" y2Max: " );
+  Serial.print( y2Max) ;
+  Serial.print (" x2Min: ");
+  Serial.print(x2Min);
+  Serial.print(" y2Min: " );
+  Serial.print( y2Min) ;
+  Serial.print (" x2Mid: ");
+  Serial.print(x2Mid);
+  Serial.print(" y2Mid: " );
+  Serial.print( y2Mid) ;
   
   
-  Serial.print (" x: ");
-  Serial.print(x);
-  Serial.print(" y: " );
-  Serial.print( y) ;
-  Serial.print(" sw: " );
-  Serial.print(sw);
+  Serial.print (" x2: ");
+  Serial.print(x2);
+  Serial.print(" y2: " );
+  Serial.print( y2) ;
   Serial.println();
+  
 }
 
 
